@@ -1,5 +1,6 @@
 import { Form, useLoaderData, useFetcher, } from "react-router-dom";
 import { getContact, updateContact } from "../contacts";
+import PropTypes from 'prop-types';
 
 export async function action({ request, params }) {
     const formData = await request.formData();
@@ -21,15 +22,6 @@ export async function loader({ params }) {
 
 export default function Contact() {
     const { contact } = useLoaderData();
-    // const contact = {
-    //     first: "Your",
-    //     last: "Name",
-    //     avatar: "https://robohash.org/you.png?size=200x200",
-    //     twitter: "your_handle",
-    //     notes: "Some notes",
-    //     favorite: true,
-    // };
-
     return (
         <div id="contact">
             <div>
@@ -97,7 +89,6 @@ function Favorite({ contact }) {
     const favorite = fetcher.formData
         ? fetcher.formData.get("favorite") === "true"
         : contact.favorite;
-    // const favorite = contact.favorite;
     return (
         <fetcher.Form method="post">
             <button
@@ -115,3 +106,8 @@ function Favorite({ contact }) {
     );
 }
 
+Favorite.propTypes = {
+    contact: PropTypes.shape({
+        favorite: PropTypes.bool.isRequired,
+    }).isRequired,
+};

@@ -18,7 +18,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
-import Index from "./routes/index";
 
 
 const router = createBrowserRouter([
@@ -32,14 +31,12 @@ const router = createBrowserRouter([
       {
         errorElement: <ErrorPage />,
         children: [
-          { index: true, element: <Index /> },
           {
             path: "contacts/:contactId",
             element: <Contact />,
             loader: contactLoader,
             action: contactAction,
           },
-          { index: true, element: <Index /> },
       {
         path: "contacts/:contactId",
         element: <Contact />,
@@ -57,7 +54,6 @@ const router = createBrowserRouter([
         action: destroyAction,
         errorElement: <div>Oops! There was an error.</div>,
       },
-          /* the rest of the routes */
         ],
       },
       
